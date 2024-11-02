@@ -24,42 +24,17 @@ jobs:
       - name: Install pandas
         run: pip install pandas
 
-      - name: List Files
-        id: list_files
-        run: |
-          ls > files_list.txt
-          cat files_list.txt
-
-      - name: Delete Extra Files
-        run: |
-          # 刪除所有以 "publicForm" 開頭且以 ".csv" 結尾的檔案
-          for file in $(cat files_list.txt); do
-            if [[ "$file" == publicForm*.csv ]]; then
-              echo "Deleting $file file/"
-              rm "$file"
-            fi
-          done
-
       - name: Running the Python script
         run: python Selenium-Template.py | more auction.csv
-
-      - name: Move specific CSV files to target folder
-        run: |
-          # 使用條件將特定格式的 CSV 移動到指定資料夾
-          for file in *.csv; do
-            if [[ $file == publicForm*.csv ]]; then
-              mv "$file" file/
-            fi
-          done
         
       - name: Commit and Push The Results From Python Selenium Action
         run: |
          git config --global user.name "github-actions[bot]"
          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
          git add -A
-         git add file/*.csv
+         git add *.csv
          git commit -m "GitHub Actions Results added"
          git push
 
 
-         
+        
