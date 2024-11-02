@@ -70,4 +70,5 @@ if DownloadedFilename != "auction.csv":
     print(f"File '{DownloadedFilename}' copied to 'auction.csv'.")
     # Delete the original downloaded file
     print("Download completed...",downloadDir+'auction.csv')
+    os.remove(DownloadedFilename)
 
