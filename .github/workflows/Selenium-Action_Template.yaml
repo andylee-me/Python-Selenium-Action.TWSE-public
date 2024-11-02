@@ -32,22 +32,22 @@ jobs:
 
       - name: Delete Extra Files
         run: |
-          # 刪除所有以 "EMGSTK_" 開頭且以 ".csv" 結尾的檔案
+          # 刪除所有以 "publicForm" 開頭且以 ".csv" 結尾的檔案
           for file in $(cat files_list.txt); do
-            if [[ "$file" == EMGSTK_*.csv ]]; then
+            if [[ "$file" == publicForm*.csv ]]; then
               echo "Deleting $file file/"
               rm "$file"
             fi
           done
 
       - name: Running the Python script
-        run: python Selenium-Template-later.py | more OTC.csv
+        run: python Selenium-Template.py | more auction.csv
 
       - name: Move specific CSV files to target folder
         run: |
           # 使用條件將特定格式的 CSV 移動到指定資料夾
           for file in *.csv; do
-            if [[ $file == EMGSTK_*.csv ]]; then
+            if [[ $file == publicForm*.csv ]]; then
               mv "$file" file/
             fi
           done
