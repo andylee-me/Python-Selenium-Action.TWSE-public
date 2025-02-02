@@ -13,7 +13,7 @@ jobs:
       - name: Checking out repo
         uses: actions/checkout@v3
       - name: Setting up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.9'
       - name: Installing package list
@@ -36,7 +36,6 @@ jobs:
         run: |
          git config --global user.name "github-actions[bot]"
          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-         git add -A
          git add *.csv
          git commit -m "⬆️ GitHub Actions Results added" || true
          git push || true
